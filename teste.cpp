@@ -35,13 +35,33 @@ void create_aiger2(string &);
 
 int main()
 {
-    string s("sat");
-    create_aiger2(s);
-    
+    char escolha;
+    std::string tipoPrimitivas;
+    std::string nomeArquivoEntrada;
+    std::string nomeArquivoSaida;
+
+    std::cout << "Digite nome do arquivo de entrada, nome do arquivo de saida e 1 Sem biblioteca ou 2 SkyWater, separados por espacos: ";
+    std::cin >> nomeArquivoEntrada >> nomeArquivoSaida >> escolha;
+
+    // Validar a entrada do usuário
+    while (escolha != '1' && escolha != '2') {
+        std::cout << "Opção inválida. Escolha novamente (1 ou 2): ";
+        std::cin >> escolha;
+    }
+
+    tipoPrimitivas = (escolha == '1') ? "Sem biblioteca" : "SkyWater";
+
+    std::cout << "Você escolheu: " << tipoPrimitivas << std::endl;
+    std::cout << "Arquivo de entrada: " << nomeArquivoEntrada << std::endl;
+    std::cout << "Arquivo de saída: " << nomeArquivoSaida << std::endl;
+
+    string s(nomeArquivoEntrada);
+    //create_aiger2(s);
+
     aig meu_aig(s);
     meu_aig.calculaAtraso();
     meu_aig.calculafaninout();
-    meu_aig.genVerilog("netlist.v");
+    meu_aig.genVerilog(nomeArquivoSaida);
     
     return 0;
 }
@@ -246,8 +266,8 @@ int aig::calculaAtraso(){
 
 }
 int aig::calculafaninout(){
- 	cout<<"Agora vou calcular fanout de cada um dos ands"<<endl;
- 	cout<<"Falta implementar!"<<endl;
+ 	cout<<"\nAgora vou calcular fanout de cada um dos ands"<<endl;
+ 	cout<<"Falta implementar!\n"<<endl;
 	return 0 ;
 }
 
@@ -332,7 +352,7 @@ void aig:: genVerilog(string verilog_name){
     }
   
    
- cout << "Verilog Netlist gerado com sucesso: " << verilog_name << endl;
+    cout << "Verilog Netlist gerado com sucesso: " << verilog_name << endl;
 
     // Close the Verilog file
     verilogFile.close();
