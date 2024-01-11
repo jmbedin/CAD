@@ -10,6 +10,9 @@ using namespace std;
 class aig{
     int *filho0_;
     int *filho1_;
+
+    int *Arvore_index;
+
     int maxvar_, ni_, no_, na_;
     set<int> entradas_;
     set<int> saidas_;
@@ -24,6 +27,7 @@ class aig{
     int print();
     int calculaAtraso();
     int calculafaninout();
+    void arv_inversores();
     void genVerilog(string verilog_name);
 
 };
@@ -269,6 +273,12 @@ int aig::calculafaninout(){
  	cout<<"\nAgora vou calcular fanout de cada um dos ands"<<endl;
  	cout<<"Falta implementar!\n"<<endl;
 	return 0 ;
+}
+void aig::arv_inversores(){
+ 	cout<<"Agora será criada a arvore de buffers inversores e sua estrutura."<<endl;
+ 	cout<<"Sendo implementada!"<<endl;
+
+	return;
 }
 
 void aig:: genVerilog(string verilog_name){
