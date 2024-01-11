@@ -10,6 +10,9 @@ using namespace std;
 class aig{
     int *filho0_;
     int *filho1_;
+
+    int *Arvore_index;
+
     int maxvar_, ni_, no_, na_;
     set<int> entradas_;
     set<int> saidas_;
@@ -24,6 +27,7 @@ class aig{
     int print();
     int calculaAtraso();
     int calculafaninout();
+    void arv_inversores();
     void genVerilog(string verilog_name);
 
 };
@@ -41,6 +45,7 @@ int main()
     aig meu_aig(s);
     meu_aig.calculaAtraso();
     meu_aig.calculafaninout();
+    meu_aig.arv_inversores();
     meu_aig.genVerilog("netlist.v");
     
     return 0;
@@ -250,6 +255,12 @@ int aig::calculafaninout(){
  	cout<<"Falta implementar!"<<endl;
 	return 0 ;
 }
+void aig::arv_inversores(){
+ 	cout<<"Agora será criada a arvore de buffers inversores e sua estrutura."<<endl;
+ 	cout<<"Sendo implementada!"<<endl;
+
+	return;
+}
 
 void aig:: genVerilog(string verilog_name){
     
@@ -332,7 +343,7 @@ void aig:: genVerilog(string verilog_name){
     }
   
    
- cout << "Verilog Netlist gerado com sucesso: " << verilog_name << endl;
+    cout << "Verilog Netlist gerado com sucesso: " << verilog_name << endl;
 
     // Close the Verilog file
     verilogFile.close();
