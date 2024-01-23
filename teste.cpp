@@ -11,7 +11,10 @@ class aig{
     int *filho0_;
     int *filho1_;
 
-    int *Arvore_index;
+    int *Arvore_index;//num_Invers // nível // nome sinal inicial // num consumidores + // num inversores do sinal // consumidores + inversores// proximo
+    int *fanout_trees; //lista de arvores e fanout associados, cada arvore tem seu vetor arvore index
+    //calculafanout-gera arvores desse vetor com algoritmo jody e gera vetor arvore index juntamente. 
+    int max_fanout;// fanout maximo de entrada
 
     int maxvar_, ni_, no_, na_;
     set<int> entradas_;
@@ -27,7 +30,6 @@ class aig{
     int print();
     int calculaAtraso();
     int calculafaninout();
-    void arv_inversores();
     void genVerilog(string verilog_name);
 
 };
@@ -178,6 +180,8 @@ aig::aig(string& filename)
     trata_linha_cabecalho_(cabecalho, maxvar, ni, no, na);
     filho0_=new int[maxvar+1];
     filho1_=new int[maxvar+1];
+    Arvore_index= new int[5*(maxvar+2)];// cada and ou inversor terá 6 posiçoes no vetor a sua disposição.
+    fanout_trees= new int [(maxvar+1)];// cada and ou inv terá 1 pos no vetor o indice ja diz o nó que tem fanout
     while (aiger_in.getline(buffer, 200, '\n'))
     {
         i++; //contador de linhas
@@ -270,15 +274,9 @@ int aig::calculaAtraso(){
 
 }
 int aig::calculafaninout(){
- 	cout<<"\nAgora vou calcular fanout de cada um dos ands"<<endl;
- 	cout<<"Falta implementar!\n"<<endl;
+ 	cout<<"Agora vou calcular fanout de cada um dos ands"<<endl;
+ 	cout<<"Falta implementar!"<<endl;
 	return 0 ;
-}
-void aig::arv_inversores(){
- 	cout<<"Agora será criada a arvore de buffers inversores e sua estrutura."<<endl;
- 	cout<<"Sendo implementada!"<<endl;
-
-	return;
 }
 
 void aig:: genVerilog(string verilog_name){
